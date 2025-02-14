@@ -1,11 +1,11 @@
+import { BiSolidVideos } from "react-icons/bi";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { CgMoreO } from "react-icons/cg";
-import { FaGift } from "react-icons/fa";
 import { TCleanedNavigateOptions } from "../../helpers/types/routes";
 import { appUiStore } from "../../stores/appUiStore";
-
+import toyButton from "@assets/sounds/toy-button.mp3";
 export function BottomNavBar() {
     const navigate = useNavigate({ from: "/" });
     const setPanelSidebarState = appUiStore.use.setPanelSidebarState();
@@ -19,9 +19,9 @@ export function BottomNavBar() {
 
     const bottomNavbarItems: TBottomNavbarItems = [
         {
-            text: "Earn",
-            icon: <FaGift color="white" size={"23px"} />,
-            path: "/reels",
+            text: "Reels",
+            icon: <BiSolidVideos color="white" size={"23px"} />,
+            path: "/home",
         },
         {
             text: "Home",
@@ -35,6 +35,10 @@ export function BottomNavBar() {
         },
     ];
 
+    const playSound = () => {
+        const audio = new Audio(toyButton); // Place your sound file in the public folder
+        audio.play();
+    };
     return (
         <div className="px-2 pb-1 rounded-t-[16px] bg-gradient-to-b from-[#022445] to-[#074675] ">
             <div className="flex items-center justify-between h-full text-white">
@@ -44,6 +48,7 @@ export function BottomNavBar() {
                             key={index}
                             className={`flex flex-col items-center justify-center px-8 py-2 border-b-3 ${bottomIconSelected === index ? "border-black bg-black/10 backdrop-blur-sm" : "border-transparent"}`}
                             onClick={() => {
+                                playSound()
                                 if (index === 2) {
                                     setPanelSidebarState({ newState: true });
                                 } else {

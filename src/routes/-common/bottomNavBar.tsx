@@ -21,7 +21,7 @@ export function BottomNavBar() {
         {
             text: "Earn",
             icon: <FaGift color="white" size={"23px"} />,
-            path: "/home",
+            path: "/reels",
         },
         {
             text: "Home",

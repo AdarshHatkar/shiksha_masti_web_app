@@ -5,6 +5,8 @@ import TopNavbar from "@common/topNavbar";
 import { appUiStore } from "@stores/appUiStore";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
+
+
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
@@ -16,6 +18,8 @@ function HomePage() {
     const navigate = useNavigate();
 
     const isSidebarVisible = appUiStore.use.isSidebarVisible();
+
+
 
     return (
         <>
@@ -47,6 +51,7 @@ function HomePage() {
                         >
                             Click me
                         </button>
+
                     </div>
                 </FadeInAnimation>
 

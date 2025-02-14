@@ -21,7 +21,7 @@ export function BottomNavBar() {
         {
             text: "Reels",
             icon: <BiSolidVideos color="white" size={"23px"} />,
-            path: "/home",
+            path: "/reels",
         },
         {
             text: "Home",
@@ -48,7 +48,7 @@ export function BottomNavBar() {
                             key={index}
                             className={`flex flex-col items-center justify-center px-8 py-2 border-b-3 ${bottomIconSelected === index ? "border-black bg-black/10 backdrop-blur-sm" : "border-transparent"}`}
                             onClick={() => {
-                                playSound()
+                                playSound();
                                 if (index === 2) {
                                     setPanelSidebarState({ newState: true });
                                 } else {

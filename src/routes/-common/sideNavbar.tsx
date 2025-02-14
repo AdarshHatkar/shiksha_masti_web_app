@@ -55,13 +55,13 @@ const SideNavbarBase = () => {
             icon: <MdLeaderboard color="#4159F9" size={25} />,
             title: "Leaderboard",
             path: "/home",
-            isHidden: !isLocalEnvironnement,
+            // isHidden: !isLocalEnvironnement,
         },
         {
             icon: <IoMdInformationCircleOutline color="#4159F9" size={25} />,
             title: "About Us",
             path: "/home",
-            isHidden: !isLocalEnvironnement,
+            // isHidden: !isLocalEnvironnement,
         },
         {
             icon: <RiCustomerService2Fill color="#4159F9" size={25} />,

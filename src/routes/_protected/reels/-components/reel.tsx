@@ -26,7 +26,7 @@ const Reel: React.FC<ReelProps> = ({ src }) => {
         src={src}
         className="w-full h-full object-cover"
         loop
-        muted
+        // muted
         playsInline
       />
       {/* UI Overlay */}

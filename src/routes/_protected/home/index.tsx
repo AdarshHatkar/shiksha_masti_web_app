@@ -35,7 +35,7 @@ function HomePage() {
                         title={"Hello User"}
                         isNotificationIconVisible
                         isSidebarAccessible
-                        isEditIconVisible
+
                         isHomePage
                     />
                 </div>

@@ -4,7 +4,7 @@ export const Route = createFileRoute("/_protected/mathGame/")({
   component: MatchGamePage
 });
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { create } from "zustand";
 import { motion } from "framer-motion";
 
@@ -25,32 +25,18 @@ type GameState = {
   message: string;
   timeLeft: number;
   gameOver: boolean;
-  difficulty: Difficulty | null;
-  setDifficulty: (difficulty: Difficulty) => void;
-  initializeGame: () => void;
+  initializeGame: (difficulty: Difficulty) => void;
   decrementTime: () => void;
   endGame: () => void;
   select: (type: "question" | "answer", value: string) => void;
 };
 
 const generateQuestions = (difficulty: Difficulty): Question[] => {
-  let operations: string[];
-  switch (difficulty) {
-    case "easy":
-      operations = ["+", "-"];
-      break;
-    case "medium":
-      operations = ["+", "-", "*"];
-      break;
-    case "hard":
-      operations = ["+", "-", "*", "/"];
-      break;
-    default:
-      operations = ["+", "-"];
-  }
+  const operations: string[] = ["+", "-"];
+  if (difficulty === "medium") operations.push("*");
+  if (difficulty === "hard") operations.push("/");
 
   const generated: Question[] = [];
-
   for (let i = 0; i < 12; i++) {
     let num1 = Math.floor(Math.random() * 20) + 1;
     let num2 = Math.floor(Math.random() * 10) + 1;
@@ -59,23 +45,16 @@ const generateQuestions = (difficulty: Difficulty): Question[] => {
     let answer: number;
 
     switch (operation) {
-      case "+":
-        answer = num1 + num2;
-        break;
-      case "-":
-        answer = num1 - num2;
-        break;
-      case "*":
-        answer = num1 * num2;
-        break;
+      case "+": answer = num1 + num2; break;
+      case "-": answer = num1 - num2; break;
+      case "*": answer = num1 * num2; break;
       case "/":
-        num2 = num2 === 0 ? 1 : num2; // Avoid division by zero
-        num1 = num2 * Math.floor(Math.random() * 10) + 1; // Ensure integer result
+        num2 = Math.floor(Math.random() * 9) + 1;
+        num1 = num2 * (Math.floor(Math.random() * 10) + 1);
         question = `${num1} / ${num2}`;
         answer = num1 / num2;
         break;
-      default:
-        answer = 0;
+      default: answer = 0;
     }
 
     generated.push({ question, answer: answer.toString() });
@@ -94,25 +73,24 @@ const useGameStore = create<GameState>(set => ({
   message: "",
   timeLeft: 60,
   gameOver: false,
-  difficulty: null,
-  setDifficulty: (difficulty) => set({ difficulty }),
-  initializeGame: () => {
-    set(state => {
-      if (!state.difficulty) return state;
-      const questions = generateQuestions(state.difficulty);
-      return {
-        shuffledQuestions: [...questions].sort(() => Math.random() - 0.5),
-        shuffledAnswers: [...questions.map(q => q.answer)].sort(() => Math.random() - 0.5),
-        selected: {},
-        points: 0,
-        attempts: 0,
-        streak: 0,
-        message: "",
-        timeLeft: 60,
-        gameOver: false,
-      };
+
+  initializeGame: (difficulty: Difficulty) => {
+    const questions = generateQuestions(difficulty);
+    const answers = questions.map(q => q.answer);
+
+    set({
+      shuffledQuestions: [...questions].sort(() => Math.random() - 0.5),
+      shuffledAnswers: [...answers].sort(() => Math.random() - 0.5),
+      selected: {},
+      points: 0,
+      attempts: 0,
+      streak: 0,
+      message: "",
+      timeLeft: 60,
+      gameOver: false,
     });
   },
+
   decrementTime: () => set(state => ({ timeLeft: state.timeLeft - 1 })),
   endGame: () => set({ gameOver: true, message: "Time's up! Game Over!" }),
   select: (type, value) => set(state => {
@@ -141,10 +119,11 @@ const useGameStore = create<GameState>(set => ({
       }
     }
     return { selected: newSelection };
-  })
+  }),
 }));
 
 export default function MatchGamePage() {
+  const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
   const {
     shuffledQuestions,
     shuffledAnswers,
@@ -155,8 +134,6 @@ export default function MatchGamePage() {
     message,
     timeLeft,
     gameOver,
-    difficulty,
-    setDifficulty,
     initializeGame,
     decrementTime,
     endGame,
@@ -165,7 +142,7 @@ export default function MatchGamePage() {
 
   useEffect(() => {
     if (difficulty) {
-      initializeGame();
+      initializeGame(difficulty);
     }
   }, [difficulty]);
 
@@ -199,7 +176,6 @@ export default function MatchGamePage() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen p-4 bg-gradient-to-b from-blue-300 to-green-200">
-
       <motion.h1 className="mt-8 mb-4 text-2xl font-bold" animate={{ scale: 1.1 }} transition={{ yoyo: Infinity, duration: 0.5 }}>
         Match the Answers! 🎮
       </motion.h1>

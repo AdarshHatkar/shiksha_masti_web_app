@@ -34,11 +34,11 @@ function HomePage() {
 
                 <div className="fixed top-0 w-[100%] sm:w-[500px] z-20 ">
                     <TopNavbar
-                        title={"Hello User"}
+                        title={"Shiksha Masti"}
                         isNotificationIconVisible
                         isSidebarAccessible
 
-                        isHomePage
+                    // isHomePage
                     />
                 </div>
                 <FadeInAnimation>

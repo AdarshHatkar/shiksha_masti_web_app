@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { cardImages, CardType } from "./-component/cardImages";
 import Card from "./-component/card";
+import TopNavbar from "@common/topNavbar";
 
 export const Route = createFileRoute("/_protected/memoryGame/")({
   component: MemoryGamePage
@@ -56,6 +57,15 @@ function MemoryGamePage() {
 
   return (
     <div className="flex flex-col items-center min-h-screen text-white bg-gray-900">
+      <div className="fixed top-0 w-[100%] sm:w-[500px] z-20 ">
+        <TopNavbar
+          title={"Memory Game"}
+          isNotificationIconVisible
+        // isSidebarAccessible
+        // isEditIconVisible
+        // isHomePage
+        />
+      </div>
       <h1 className="my-4 text-3xl font-bold">Memory Game</h1>
       <button
         className="px-4 py-2 mb-4 bg-blue-500 rounded-lg"
@@ -63,7 +73,7 @@ function MemoryGamePage() {
       >
         Restart Game
       </button>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 px-5 mx-auto">
         {cards.map((card) => (
           <Card
             key={card.id}

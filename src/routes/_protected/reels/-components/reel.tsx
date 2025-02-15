@@ -50,7 +50,7 @@ const Reel: React.FC<ReelProps> = ({ src }) => {
         src={src}
         className="object-cover w-full h-full"
         loop
-        muted
+        // muted
         playsInline
       />
 

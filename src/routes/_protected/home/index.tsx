@@ -53,15 +53,26 @@ function HomePage() {
                             Click me
                         </button>
                         <br />
-                        <Button
-                            className="text-white"
-                            onClick={() => {
-                                navigate({
-                                    to: "/mathGame"
-                                });
-                            }}>
-                            Match Game
-                        </Button>
+                        <div className="flex w-full justify-evenly">
+                            <Button
+                                className="text-black"
+                                onClick={() => {
+                                    navigate({
+                                        to: "/mathGame"
+                                    });
+                                }}>
+                                Math Game
+                            </Button>
+                            <Button
+                                className="text-black"
+                                onClick={() => {
+                                    navigate({
+                                        to: "/memoryGame"
+                                    });
+                                }}>
+                                Memory Game
+                            </Button>
+                        </div>
 
                     </div>
                 </FadeInAnimation>

@@ -2,11 +2,12 @@ import BottomNavBar from "@common/bottomNavBar";
 import { FadeInAnimation } from "@common/framerMotion/fadeInAnimation";
 import { SideNavbar } from "@common/sideNavbar";
 import TopNavbar from "@common/topNavbar";
-import { Button } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { appUiStore } from "@stores/appUiStore";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
-
+import memoryGame from "@assets/images/memoryGame.avif";
+import mathGame from "@assets/images/mathGame.jpg";
 
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -42,19 +43,25 @@ function HomePage() {
                 </div>
                 <FadeInAnimation>
                     <div className="h-screen pb-32 overflow-scroll">
-                        <h1 className="pt-16 text-center text-white">Home Page </h1>
-                        <button
-                            onClick={() => {
-                                navigate({
-                                    to: "/editProfile",
-                                });
-                            }}
-                        >
-                            Click me
-                        </button>
+                        <h1 className="pt-16 text-center text-white"> </h1>
+
                         <br />
-                        <div className="flex w-full justify-evenly">
-                            <Button
+                        <div className="flex flex-col items-center w-full gap-7 ">
+
+
+                            <Image src={memoryGame} alt="memoryGame" className="w-full max-w-[350px]" onClick={() => {
+                                navigate({
+                                    to: "/memoryGame"
+                                });
+                            }} />
+                            <Image src={mathGame} alt="mathGame" className="w-full max-w-[350px]" onClick={() => {
+                                navigate({
+                                    to: "/mathGame"
+                                });
+                            }} />
+
+
+                            {/* <Button
                                 className="text-black"
                                 onClick={() => {
                                     navigate({
@@ -71,7 +78,7 @@ function HomePage() {
                                     });
                                 }}>
                                 Memory Game
-                            </Button>
+                            </Button> */}
                         </div>
 
                     </div>

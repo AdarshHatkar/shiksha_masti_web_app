@@ -2,6 +2,7 @@ import BottomNavBar from "@common/bottomNavBar";
 import { FadeInAnimation } from "@common/framerMotion/fadeInAnimation";
 import { SideNavbar } from "@common/sideNavbar";
 import TopNavbar from "@common/topNavbar";
+import { Button } from "@nextui-org/react";
 import { appUiStore } from "@stores/appUiStore";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 
@@ -51,6 +52,16 @@ function HomePage() {
                         >
                             Click me
                         </button>
+                        <br />
+                        <Button
+                            className="text-white"
+                            onClick={() => {
+                                navigate({
+                                    to: "/mathGame"
+                                });
+                            }}>
+                            Match Game
+                        </Button>
 
                     </div>
                 </FadeInAnimation>

@@ -54,7 +54,7 @@ const SideNavbarBase = () => {
         {
             icon: <MdLeaderboard color="#4159F9" size={25} />,
             title: "Leaderboard",
-            path: "/home",
+            path: "/leaderboard",
             // isHidden: !isLocalEnvironnement,
         },
         {
